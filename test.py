@@ -382,11 +382,11 @@ elif st.session_state.new_dashboard:
     st.sidebar.header("Dashboard Selection")
     dashboard_choice = st.sidebar.radio(
         "Choose a dashboard:",
-        options=["Indicator Dashboard", "Electricity Loss Comparison", "Brazil Germany Comparison", "Data Availability"],
+        options=["Indicator Dashboard", "Electricity Loss", "Income Spent On Electricity", "Data Availability"],
         index=0
     )
 
-    if dashboard_choice == "Brazil Germany Comparison":
+    if dashboard_choice == "Income Spent On Electricity":
         # Funktion zum Laden des Brazil Germany Comparison-Datasets
         @st.cache_data
         def load_brazil_germany_comparison_data():
@@ -690,7 +690,7 @@ elif st.session_state.new_dashboard:
             st.session_state.results_shown = True  # Switch to results page
             st.experimental_rerun()
 
-    elif dashboard_choice == "Electricity Loss Comparison":
+    elif dashboard_choice == "Electricity Loss":
         @st.cache_data
         def load_elecloss2_data():
             data_path = 'Data/elecloss2.csv'
