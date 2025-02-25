@@ -412,22 +412,36 @@ elif st.session_state.new_dashboard:
             id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
         ).rename(columns={"Percentile": "Country"})
         # Erstelle zwei unbeschriftete Liniendiagramme
-        fig_lin = px.line(df_linear_melted, x="IncomeGroup", y="Value", color="Country")
+        fig_lin = px.line(
+            df_linear_melted,
+            x="IncomeGroup",
+            y="Value",
+            color="Country",
+            title="Comparison of Income in Germany and Brazil (Linear Scale)",
+            markers=True
+        )
         fig_lin.update_layout(
             template="plotly_white",
-            xaxis_title=None,
-            yaxis_title=None,
+            xaxis_title="Percentiles",
+            yaxis_title="Net Income (EUR)",
             showlegend=False,
-            margin=dict(l=10, r=10, t=10, b=10)
+            margin=dict(l=10, r=10, t=50, b=10)
         )
 
-        fig_log = px.line(df_log_melted, x="IncomeGroup", y="Value", color="Country")
+        fig_log = px.line(
+            df_log_melted,
+            x="IncomeGroup",
+            y="Value",
+            color="Country",
+            title="Logarithmic Comparison of Incomes in Germany and Brazil",
+            markers=True
+        )
         fig_log.update_layout(
             template="plotly_white",
-            xaxis_title=None,
-            yaxis_title=None,
+            xaxis_title="Percentiles",
+            yaxis_title="Logarithmic Income (EUR)",
             showlegend=False,
-            margin=dict(l=10, r=10, t=10, b=10)
+            margin=dict(l=10, r=10, t=50, b=10)
         )
 
         # Nebeneinander darstellen
