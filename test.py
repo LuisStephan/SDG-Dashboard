@@ -450,6 +450,11 @@ elif st.session_state.new_dashboard:
             st.plotly_chart(fig_lin, use_container_width=True)
         with col2:
             st.plotly_chart(fig_log, use_container_width=True)
+
+        st.markdown(
+            "The graphs show net incomes in Germany and Brazil, divided into percentiles from the lowest to the highest earners. One chart uses a linear scale, and the other uses a logarithmic scale, both adjusted to Germany’s cost of living for direct comparison."
+        )
+        
         st.markdown("---")
         # ------------------ ENDE NEUER TEIL ------------------
 
