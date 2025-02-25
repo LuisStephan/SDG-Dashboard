@@ -387,17 +387,6 @@ elif st.session_state.new_dashboard:
     )
 
 if dashboard_choice == "Brazil Germany Comparison":
-    # Funktion zum Laden des Brazil Germany Comparison-Datasets
-    @st.cache_data
-    def load_brazil_germany_comparison_data():
-        data_path = 'Data/Brazil Germany Comparison .xlsx'  # Der Pfad zum Dataset im Data-Ordner
-        if os.path.exists(data_path):
-            data = pd.read_excel(data_path, engine="openpyxl")
-            return data
-        else:
-            st.error(f"Dataset {data_path} not found.")
-            return None
-
     # ------------------ NEUER TEIL: Zwei unbeschriftete Liniendiagramme ------------------
     # Diese Diagramme werden vor dem Balkendiagramm angezeigt.
     df_linear = pd.read_csv("linear.csv", sep=";")
@@ -434,6 +423,17 @@ if dashboard_choice == "Brazil Germany Comparison":
         st.plotly_chart(fig_log, use_container_width=True)
     st.markdown("---")
     # ------------------ ENDE NEUER TEIL ------------------
+
+    # Laden des Brazil Germany Comparison-Datasets
+    @st.cache_data
+    def load_brazil_germany_comparison_data():
+        data_path = 'Data/Brazil Germany Comparison .xlsx'
+        if os.path.exists(data_path):
+            data = pd.read_excel(data_path, engine="openpyxl")
+            return data
+        else:
+            st.error(f"Dataset {data_path} not found.")
+            return None
 
     brazil_germany_data = load_brazil_germany_comparison_data()
 
@@ -476,13 +476,12 @@ if dashboard_choice == "Brazil Germany Comparison":
         """)
     else:
         st.warning("No data available for Brazil Germany Comparison.")
-        
+
     with st.sidebar:
         st.write("---")
         if st.button("Click 2x to proceed", key="proceed_to_results_brazil_germany"):
             st.session_state.results_shown = True
             st.experimental_rerun()
-                
     elif dashboard_choice == "Indicator Dashboard":
         @st.cache_data
         def load_goal7_data():
