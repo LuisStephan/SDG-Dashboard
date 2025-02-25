@@ -389,7 +389,7 @@ elif st.session_state.new_dashboard:
     if dashboard_choice == "Brazil Germany Comparison":
     @st.cache_data
     def load_brazil_germany_comparison_data():
-        data_path = 'Data/Brazil Germany Comparison .xlsx'
+        data_path = 'Data/Brazil Germany Comparison .xlsx'  # Der Pfad zum Dataset im Data-Ordner
         if os.path.exists(data_path):
             data = pd.read_excel(data_path, engine="openpyxl")
             return data
@@ -406,8 +406,12 @@ elif st.session_state.new_dashboard:
     df_log = pd.read_csv("Data/log.csv", sep=";")
 
     # Wide -> Long-Format
-    df_linear_melted = df_linear.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
-    df_log_melted = df_log.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
+    df_linear_melted = df_linear.melt(
+        id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+    ).rename(columns={"Percentile": "Country"})
+    df_log_melted = df_log.melt(
+        id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+    ).rename(columns={"Percentile": "Country"})
 
     # ERSTER GRAPH (LINEAR)
     fig_lin = px.line(
@@ -415,13 +419,13 @@ elif st.session_state.new_dashboard:
         x="IncomeGroup",
         y="Value",
         color="Country",
-        title="Comparison of Income in Germany and Brazil (Linear Scale)",  # TITEL
+        title="Comparison of Income in Germany and Brazil (Linear Scale)",
         markers=True
     )
     fig_lin.update_layout(
         template="plotly_white",
-        xaxis_title="Percentiles",         # X-ACHSENTITEL
-        yaxis_title="Net Income (EUR)",    # Y-ACHSENTITEL
+        xaxis_title="Percentiles",
+        yaxis_title="Net Income (EUR)",
         showlegend=False,
         margin=dict(l=10, r=10, t=50, b=10)
     )
@@ -432,44 +436,45 @@ elif st.session_state.new_dashboard:
         x="IncomeGroup",
         y="Value",
         color="Country",
-        title="Logarithmic Comparison of Incomes in Germany and Brazil",  # TITEL
+        title="Logarithmic Comparison of Incomes in Germany and Brazil",
         markers=True
     )
     fig_log.update_layout(
         template="plotly_white",
-        xaxis_title="Percentiles",             # X-ACHSENTITEL
-        yaxis_title="Logarithmic Income (EUR)",# Y-ACHSENTITEL
+        xaxis_title="Percentiles",
+        yaxis_title="Logarithmic Income (EUR)",
         showlegend=False,
         margin=dict(l=10, r=10, t=50, b=10)
     )
 
-    # Beide Diagramme nebeneinander
+    # Beide Diagramme nebeneinander darstellen
     col1, col2 = st.columns(2)
     with col1:
         st.plotly_chart(fig_lin, use_container_width=True)
     with col2:
         st.plotly_chart(fig_log, use_container_width=True)
-
     st.markdown("---")
     # ------------------ ENDE NEUER TEIL ------------------
 
-    # BALKENDIAGRAMM (unverändert)
     brazil_germany_data = load_brazil_germany_comparison_data()
+
     if brazil_germany_data is not None:
         st.title("Comparison of Per Capita Energy Expenditure Between Brazil and Germany")
         data_to_plot = brazil_germany_data.iloc[0:10, [3, 4]]
         data_to_plot = data_to_plot * 100
         data_to_plot.columns = ['Brazil', 'Germany']
 
+        # Erstellen des Balkendiagramms
         fig = px.bar(
             data_to_plot,
-            x=data_to_plot.index,
+            x=data_to_plot.index,  # Einkommensgruppen korrekt anzeigen (0-10%, 10-20%, ...)
             y=data_to_plot.columns,
             title="Brazil vs Germany Comparison (Percentage of Income Spent on Electricity)",
             labels={"x": "Income Percentile Group", "y": "Percentage of income p.p. spent on electricity (%)"},
             barmode='group',
             height=400
         )
+
         fig.update_layout(
             template="plotly_white",
             xaxis_title="Income Percentile Group",
