@@ -387,67 +387,101 @@ elif st.session_state.new_dashboard:
     )
 
     if dashboard_choice == "Brazil Germany Comparison":
-        # Funktion zum Laden des Brazil Germany Comparison-Datasets
-        @st.cache_data
-        def load_brazil_germany_comparison_data():
-            data_path = 'Data/Brazil Germany Comparison .xlsx'  # Der Pfad zum Dataset im Data-Ordner
-            if os.path.exists(data_path):
-                data = pd.read_excel(data_path, engine="openpyxl")
-                return data
-            else:
-                st.error(f"Dataset {data_path} not found.")
-                return None
-
-        brazil_germany_data = load_brazil_germany_comparison_data()
-
-        if brazil_germany_data is not None:
-            st.title("Comparison of Per Capita Energy Expenditure Between Brazil and Germany")
-            data_to_plot = brazil_germany_data.iloc[0:10, [3, 4]]  
-            data_to_plot = data_to_plot * 100
-            data_to_plot.columns = ['Brazil', 'Germany']
-
-            # Erstellen des Balkendiagramms
-            fig = px.bar(
-                data_to_plot,
-                x=data_to_plot.index,  # Einkommensgruppen korrekt anzeigen (0-10%, 10-20%, ...)
-                y=data_to_plot.columns,
-                title="Brazil vs Germany Comparison (Percentage of Income Spent on Electricity)",
-                labels={"x": "Income Percentile Group", "y": "Percentage of income p.p. spent on electricity (%)"},
-                barmode='group',
-                height=400
-            )
-
-            fig.update_layout(
-                template="plotly_white",
-                xaxis_title="Income Percentile Group",
-                yaxis_title="Percentage of Income Spent on Electricity",
-                yaxis=dict(
-                    tickmode="array",
-                    tickvals=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],  # Y-Achse mit Werten von 0 bis 100
-                    ticktext=["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]
-                ),
-                xaxis=dict(
-                    tickvals=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],  # 0 bis 9 für die Einkommensgruppen
-                    ticktext=["0-10%", "10-20%", "20-30%", "30-40%", "40-50%", "50-60%", "60-70%", "70-80%", "80-90%", "90-100%"]
-                )
-            )
-            st.plotly_chart(fig, use_container_width=True)
-
-            # Text unter dem Graphen hinzufügen
-            st.markdown("""
-            The graph shows income percentiles, which divide the population into equal 10% groups based on income levels. 
-            It compares the percentage of income spent on electricity in Brazil and Germany for each percentile group.
-            """)
-
+    # Funktion zum Laden des Brazil Germany Comparison-Datasets
+    @st.cache_data
+    def load_brazil_germany_comparison_data():
+        data_path = 'Data/Brazil Germany Comparison .xlsx'  # Der Pfad zum Dataset im Data-Ordner
+        if os.path.exists(data_path):
+            data = pd.read_excel(data_path, engine="openpyxl")
+            return data
         else:
-            st.warning("No data available for Brazil Germany Comparison.")
-            
-            # Add the "Click 2x to proceed" button in the sidebar
-        with st.sidebar:
-            st.write("---")
-            if st.button("Click 2x to proceed", key="proceed_to_results_brazil_germany"):
-                st.session_state.results_shown = True
-                st.experimental_rerun()
+            st.error(f"Dataset {data_path} not found.")
+            return None
+
+    # ------------------ NEUER TEIL: Zwei unbeschriftete Liniendiagramme ------------------
+    # Diese Diagramme werden vor dem Balkendiagramm angezeigt.
+    df_linear = pd.read_csv("linear.csv", sep=";")
+    df_log = pd.read_csv("log.csv", sep=";")
+
+    # Umwandeln in Long-Format
+    df_linear_melted = df_linear.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
+    df_log_melted = df_log.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
+
+    # Erstelle zwei unbeschriftete Liniendiagramme
+    fig_lin = px.line(df_linear_melted, x="IncomeGroup", y="Value", color="Country")
+    fig_lin.update_layout(
+        template="plotly_white",
+        xaxis_title=None,
+        yaxis_title=None,
+        showlegend=False,
+        margin=dict(l=10, r=10, t=10, b=10)
+    )
+
+    fig_log = px.line(df_log_melted, x="IncomeGroup", y="Value", color="Country")
+    fig_log.update_layout(
+        template="plotly_white",
+        xaxis_title=None,
+        yaxis_title=None,
+        showlegend=False,
+        margin=dict(l=10, r=10, t=10, b=10)
+    )
+
+    # Nebeneinander darstellen
+    col1, col2 = st.columns(2)
+    with col1:
+        st.plotly_chart(fig_lin, use_container_width=True)
+    with col2:
+        st.plotly_chart(fig_log, use_container_width=True)
+    st.markdown("---")
+    # ------------------ ENDE NEUER TEIL ------------------
+
+    brazil_germany_data = load_brazil_germany_comparison_data()
+
+    if brazil_germany_data is not None:
+        st.title("Comparison of Per Capita Energy Expenditure Between Brazil and Germany")
+        data_to_plot = brazil_germany_data.iloc[0:10, [3, 4]]
+        data_to_plot = data_to_plot * 100
+        data_to_plot.columns = ['Brazil', 'Germany']
+
+        # Erstellen des Balkendiagramms
+        fig = px.bar(
+            data_to_plot,
+            x=data_to_plot.index,
+            y=data_to_plot.columns,
+            title="Brazil vs Germany Comparison (Percentage of Income Spent on Electricity)",
+            labels={"x": "Income Percentile Group", "y": "Percentage of income p.p. spent on electricity (%)"},
+            barmode='group',
+            height=400
+        )
+
+        fig.update_layout(
+            template="plotly_white",
+            xaxis_title="Income Percentile Group",
+            yaxis_title="Percentage of Income Spent on Electricity",
+            yaxis=dict(
+                tickmode="array",
+                tickvals=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                ticktext=["0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"]
+            ),
+            xaxis=dict(
+                tickvals=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                ticktext=["0-10%", "10-20%", "20-30%", "30-40%", "40-50%", "50-60%", "60-70%", "70-80%", "80-90%", "90-100%"]
+            )
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("""
+        The graph shows income percentiles, which divide the population into equal 10% groups based on income levels. 
+        It compares the percentage of income spent on electricity in Brazil and Germany for each percentile group.
+        """)
+    else:
+        st.warning("No data available for Brazil Germany Comparison.")
+        
+    with st.sidebar:
+        st.write("---")
+        if st.button("Click 2x to proceed", key="proceed_to_results_brazil_germany"):
+            st.session_state.results_shown = True
+            st.experimental_rerun()
                 
     elif dashboard_choice == "Indicator Dashboard":
         @st.cache_data
