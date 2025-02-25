@@ -400,8 +400,8 @@ elif st.session_state.new_dashboard:
 
         # ------------------ NEUER TEIL: Zwei unbeschriftete Liniendiagramme ------------------
         # Diese Diagramme werden vor dem Balkendiagramm angezeigt.
-        df_linear = pd.read_csv("linear.csv", sep=";")
-        df_log = pd.read_csv("log.csv", sep=";")
+        df_linear = pd.read_csv("Data/linear.csv", sep=";")
+        df_log = pd.read_csv("Data/log.csv", sep=";")
 
         # Umwandeln in Long-Format
         df_linear_melted = df_linear.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
