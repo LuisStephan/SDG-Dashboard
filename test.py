@@ -400,13 +400,17 @@ elif st.session_state.new_dashboard:
 
         # ------------------ NEUER TEIL: Zwei unbeschriftete Liniendiagramme ------------------
         # Diese Diagramme werden vor dem Balkendiagramm angezeigt.
+        st.markdown("# Income Comparison (PPP adjusted to Germany)")
         df_linear = pd.read_csv("Data/linear.csv", sep=";")
         df_log = pd.read_csv("Data/log.csv", sep=";")
 
         # Umwandeln in Long-Format
-        df_linear_melted = df_linear.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
-        df_log_melted = df_log.melt(id_vars="Percentile", var_name="IncomeGroup", value_name="Value").rename(columns={"Percentile": "Country"})
-
+        df_linear_melted = df_linear.melt(
+            id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+        ).rename(columns={"Percentile": "Country"})
+        df_log_melted = df_log.melt(
+            id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+        ).rename(columns={"Percentile": "Country"})
         # Erstelle zwei unbeschriftete Liniendiagramme
         fig_lin = px.line(df_linear_melted, x="IncomeGroup", y="Value", color="Country")
         fig_lin.update_layout(
