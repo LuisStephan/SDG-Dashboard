@@ -756,7 +756,7 @@ elif st.session_state.new_dashboard:
         data_availability = load_data_availability()
     
         if data_availability is not None:
-            median_availability = data_availability["Data Availability (%)"].median()
+            average_availability = data_availability["Data Availability (%)"].mean()
             fig = px.bar(
                 data_availability,
                 x="Goal",
@@ -767,14 +767,14 @@ elif st.session_state.new_dashboard:
                 color="Data Availability (%)",
                 color_continuous_scale='RdYlGn'
             )
-            fig.add_hline(y=median_availability, line_dash="dot", line_color="blue", annotation_text="Median", annotation_position="bottom right")
+            fig.add_hline(y=average_availability, line_dash="dot", line_color="blue", annotation_text="Average", annotation_position="bottom right")
             fig.update_traces(textposition='outside')
             fig.update_layout(template="plotly_white", yaxis=dict(range=[0, 100]))
             st.plotly_chart(fig, use_container_width=True)
     
             st.markdown(f"""
             **Data availability** indicates the percentage of 193 UNO Member States for which data exists for each Sustainable Development Goal.  
-            **Median Data Availability:** {median_availability:.2f}%
+            **Average Data Availability:** {average_availability:.2f}%
             """)
     
         else:
