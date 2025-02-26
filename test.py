@@ -188,7 +188,7 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
         filtered_data.rename(columns={current_sdg: "Color"}, inplace=True)
     
         # Adjust color mapping based on selected country
-        if selected_country and selected_country in filtered_data["Country"].values:
+        if selected_country and selected_country != "None":
             filtered_data["Color"] = filtered_data.apply(
                 lambda row: row["Color"] if row["Country"] == selected_country else "grey", axis=1
             )
@@ -275,7 +275,8 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
         selected_sdg_label = sdg_labels[st.session_state.selected_sdg_index]
         st.markdown(f"### Trend for {selected_sdg_label}")
 
-        selected_country = st.selectbox("Select a country:", options=color_data["Country"].unique(), key="country_dropdown")
+        country_options = ["None"] + list(color_data["Country"].unique())
+        selected_country = st.selectbox("Select a country:", options=country_options, key="country_dropdown")
 
         if selected_country:
             current_sdg = color_columns[st.session_state.selected_sdg_index]
