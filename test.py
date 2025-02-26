@@ -183,47 +183,47 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
 
     # Generate map
     def generate_map(selected_sdg_index, selected_country=None):
-    current_sdg = color_columns[selected_sdg_index]
-    filtered_data = color_data[["Country", current_sdg]].dropna()
-    filtered_data.rename(columns={current_sdg: "Color"}, inplace=True)
-
-    # Adjust color mapping based on selected country
-    if selected_country and selected_country in filtered_data["Country"].values:
-        filtered_data["Color"] = filtered_data.apply(
-            lambda row: row["Color"] if row["Country"] == selected_country else "grey", axis=1
-        )
-
-    fig = px.choropleth(
-        filtered_data,
-        locations="Country",
-        locationmode="country names",
-        color="Color",
-        hover_name="Country",
-        hover_data={"Country": True, "Color": False},
-        color_discrete_map=color_hex_mapping
-    )
-
-    fig.update_traces(marker_line_width=0)
-    fig.update_layout(
-        margin={"r": 0, "t": 0, "l": 0, "b": 0},
-        paper_bgcolor="#f9f9f9",
-        plot_bgcolor="#f9f9f9",
-        showlegend=False,
-        dragmode=False,
-        annotations=[
-            dict(
-                x=0.94,  # Adjust x-coordinate for placement (right bottom)
-                y=0.001,  # Adjust y-coordinate for placement (bottom)
-                xref="paper",
-                yref="paper",
-                text="Status: 2024",  # The note text
-                showarrow=False,
-                font=dict(size=12, color="black"),
-                align="right"
+        current_sdg = color_columns[selected_sdg_index]
+        filtered_data = color_data[["Country", current_sdg]].dropna()
+        filtered_data.rename(columns={current_sdg: "Color"}, inplace=True)
+    
+        # Adjust color mapping based on selected country
+        if selected_country and selected_country in filtered_data["Country"].values:
+            filtered_data["Color"] = filtered_data.apply(
+                lambda row: row["Color"] if row["Country"] == selected_country else "grey", axis=1
             )
-        ]
-    )
-    return fig
+    
+        fig = px.choropleth(
+            filtered_data,
+            locations="Country",
+            locationmode="country names",
+            color="Color",
+            hover_name="Country",
+            hover_data={"Country": True, "Color": False},
+            color_discrete_map=color_hex_mapping
+        )
+    
+        fig.update_traces(marker_line_width=0)
+        fig.update_layout(
+            margin={"r": 0, "t": 0, "l": 0, "b": 0},
+            paper_bgcolor="#f9f9f9",
+            plot_bgcolor="#f9f9f9",
+            showlegend=False,
+            dragmode=False,
+            annotations=[
+                dict(
+                    x=0.94,  # Adjust x-coordinate for placement (right bottom)
+                    y=0.001,  # Adjust y-coordinate for placement (bottom)
+                    xref="paper",
+                    yref="paper",
+                    text="Status: 2024",  # The note text
+                    showarrow=False,
+                    font=dict(size=12, color="black"),
+                    align="right"
+                )
+            ]
+        )
+        return fig
 
 
     # Layout: Instructions, Map, Legend
