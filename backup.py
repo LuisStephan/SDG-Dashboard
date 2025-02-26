@@ -182,11 +182,17 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
     }
 
     # Generate map
-    def generate_map(selected_sdg_index):
+    def generate_map(selected_sdg_index, selected_country=None):
         current_sdg = color_columns[selected_sdg_index]
         filtered_data = color_data[["Country", current_sdg]].dropna()
         filtered_data.rename(columns={current_sdg: "Color"}, inplace=True)
-
+    
+        # Adjust color mapping based on selected country
+        if selected_country and selected_country != "None":
+            filtered_data["Color"] = filtered_data.apply(
+                lambda row: row["Color"] if row["Country"] == selected_country else "grey", axis=1
+            )
+    
         fig = px.choropleth(
             filtered_data,
             locations="Country",
@@ -196,7 +202,7 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
             hover_data={"Country": True, "Color": False},
             color_discrete_map=color_hex_mapping
         )
-
+    
         fig.update_traces(marker_line_width=0)
         fig.update_layout(
             margin={"r": 0, "t": 0, "l": 0, "b": 0},
@@ -218,6 +224,7 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
             ]
         )
         return fig
+
 
     # Layout: Instructions, Map, Legend
     header_cols = st.columns([1.5, 4, 1.5])
@@ -250,7 +257,7 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
 
     with header_cols[1]:
         st.markdown("<h2 style='text-align: center; margin-bottom: 10px;'>Global SDG Performance</h2>", unsafe_allow_html=True)
-        fig = generate_map(st.session_state.selected_sdg_index)
+        fig = generate_map(st.session_state.selected_sdg_index, selected_country=st.session_state.get("country_dropdown"))
         st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
 
     with header_cols[2]:
@@ -268,7 +275,8 @@ if st.session_state.proceed and not st.session_state.new_dashboard:
         selected_sdg_label = sdg_labels[st.session_state.selected_sdg_index]
         st.markdown(f"### Trend for {selected_sdg_label}")
 
-        selected_country = st.selectbox("Select a country:", options=color_data["Country"].unique(), key="country_dropdown")
+        country_options = ["None"] + list(color_data["Country"].unique())
+        selected_country = st.selectbox("Select a country:", options=country_options, key="country_dropdown")
 
         if selected_country:
             current_sdg = color_columns[st.session_state.selected_sdg_index]
@@ -382,11 +390,11 @@ elif st.session_state.new_dashboard:
     st.sidebar.header("Dashboard Selection")
     dashboard_choice = st.sidebar.radio(
         "Choose a dashboard:",
-        options=["Indicator Dashboard", "Electricity Loss Comparison", "Brazil Germany Comparison", "Data Availability"],
+        options=["Indicator Dashboard", "Electricity Loss", "Income Spent On Electricity", "Data Availability"],
         index=0
     )
 
-    if dashboard_choice == "Brazil Germany Comparison":
+    if dashboard_choice == "Income Spent On Electricity":
         # Funktion zum Laden des Brazil Germany Comparison-Datasets
         @st.cache_data
         def load_brazil_germany_comparison_data():
@@ -397,6 +405,66 @@ elif st.session_state.new_dashboard:
             else:
                 st.error(f"Dataset {data_path} not found.")
                 return None
+
+        # ------------------ NEUER TEIL: Zwei unbeschriftete Liniendiagramme ------------------
+        # Diese Diagramme werden vor dem Balkendiagramm angezeigt.
+        st.markdown("# Income Comparison (PPP adjusted to Germany)")
+        df_linear = pd.read_csv("Data/linear.csv", sep=";")
+        df_log = pd.read_csv("Data/log.csv", sep=";")
+
+        # Umwandeln in Long-Format
+        df_linear_melted = df_linear.melt(
+            id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+        ).rename(columns={"Percentile": "Country"})
+        df_log_melted = df_log.melt(
+            id_vars="Percentile", var_name="IncomeGroup", value_name="Value"
+        ).rename(columns={"Percentile": "Country"})
+        # Erstelle zwei unbeschriftete Liniendiagramme
+        fig_lin = px.line(
+            df_linear_melted,
+            x="IncomeGroup",
+            y="Value",
+            color="Country",
+            title="Comparison of Income in Germany and Brazil (Linear Scale)",
+            markers=True
+        )
+        fig_lin.update_layout(
+            template="plotly_white",
+            xaxis_title="Percentiles",
+            yaxis_title="Net Income (EUR)",
+            showlegend=False,
+            margin=dict(l=10, r=10, t=50, b=10)
+        )
+
+        fig_log = px.line(
+            df_log_melted,
+            x="IncomeGroup",
+            y="Value",
+            color="Country",
+            title="Logarithmic Comparison of Incomes in Germany and Brazil",
+            markers=True
+        )
+        fig_log.update_layout(
+            template="plotly_white",
+            xaxis_title="Percentiles",
+            yaxis_title="Logarithmic Income (EUR)",
+            showlegend=False,
+            margin=dict(l=10, r=10, t=50, b=10)
+        )
+
+        # Nebeneinander darstellen
+        col1, col2 = st.columns(2)
+        with col1:
+            st.plotly_chart(fig_lin, use_container_width=True)
+        with col2:
+            st.plotly_chart(fig_log, use_container_width=True)
+
+        st.markdown(
+            "The graphs show net incomes in Germany and Brazil, divided into percentiles from the lowest to the highest earners. One chart uses a linear scale, and the other uses a logarithmic scale, both adjusted to Germany’s cost of living for direct comparison."
+        )
+        
+        st.markdown("---")
+        # ------------------ ENDE NEUER TEIL ------------------
 
         brazil_germany_data = load_brazil_germany_comparison_data()
 
@@ -433,16 +501,13 @@ elif st.session_state.new_dashboard:
             )
             st.plotly_chart(fig, use_container_width=True)
 
-            # Text unter dem Graphen hinzufügen
             st.markdown("""
             The graph shows income percentiles, which divide the population into equal 10% groups based on income levels. 
             It compares the percentage of income spent on electricity in Brazil and Germany for each percentile group.
             """)
-
         else:
             st.warning("No data available for Brazil Germany Comparison.")
             
-            # Add the "Click 2x to proceed" button in the sidebar
         with st.sidebar:
             st.write("---")
             if st.button("Click 2x to proceed", key="proceed_to_results_brazil_germany"):
@@ -624,8 +689,6 @@ elif st.session_state.new_dashboard:
                     else:
                         st.error("The column 'Type of renewable technology' is missing in the data.")
                         
-                       # Add the "Click 2x to proceed" button in the sidebar
-
             else:
                 st.write("No data available for the selected indicator and countries.")
 
@@ -635,7 +698,7 @@ elif st.session_state.new_dashboard:
             st.session_state.results_shown = True  # Switch to results page
             st.experimental_rerun()
 
-    elif dashboard_choice == "Electricity Loss Comparison":
+    elif dashboard_choice == "Electricity Loss":
         @st.cache_data
         def load_elecloss2_data():
             data_path = 'Data/elecloss2.csv'
@@ -726,6 +789,9 @@ elif st.session_state.new_dashboard:
             st.warning("Data availability file not found.")
 
 
+        
+
+            
          # Add the "Click 2x to proceed" button in the sidebar
         with st.sidebar:
             st.write("---")
