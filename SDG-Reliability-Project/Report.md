@@ -153,6 +153,8 @@ Our mission was to determine whether SDG scores are reliable and universally app
 ### 4.1 Brazil’s Performance on SDG 7
 Our interactive world map dashboard highlights Brazil’s strong performance on SDG 7. The overall SDG 7 performance is computed by aggregating various indicators, providing a comprehensive view of a country’s status.
 
+![SDG Dashboard](SDG-Reliability-Project/Figures/Picture16.png)
+
 *Source: [SDG Transformation Center, Sustainable Development Report](https://dashboards.sdgindex.org/rankings)  
 Source: [United Nations](https://sdgs.un.org/goals/goal7#targets_and_indicators)*
 
