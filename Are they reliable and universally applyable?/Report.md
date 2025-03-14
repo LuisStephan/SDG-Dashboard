@@ -21,6 +21,7 @@
    4.4 [Affordability Concerns](#44-affordability-concerns)  
 5. [Discussion](#discussion)  
 6. [Conclusion](#conclusion)
+7. [References](#References)
 
 ---
 
@@ -45,34 +46,34 @@ Our emerging research question was:
 ## 2. Theoretical Framework
 
 ### 2.1 The Concept of Sustainable Development
-The state of the world demands a shift towards a sustainable future, which is why the World Commission on Environment and Development was tasked by the UN to compile “A global agenda for change” in the Brundtland Report published in 1987 [1]. There, sustainable development is defined as "development that meets the needs of the present without compromising the ability of future generations to meet their own needs" [1]. This encapsulates an inherent consideration of the long-term environmental impact of human activities, promoting a harmonious coexistence of human society and the natural environment.
+The state of the world demands a shift towards a sustainable future, which is why the World Commission on Environment and Development was tasked by the UN to compile “A global agenda for change” in the Brundtland Report published in 1987. There, sustainable development is defined as "development that meets the needs of the present without compromising the ability of future generations to meet their own needs". This encapsulates an inherent consideration of the long-term environmental impact of human activities, promoting a harmonious coexistence of human society and the natural environment.
 
-The dimensions of sustainable development are divided into five pillars: People, Planet, Prosperity, Peace, and Partnerships [2].
+The dimensions of sustainable development are divided into five pillars: People, Planet, Prosperity, Peace, and Partnerships.
 
 ### 2.2 Sustainable Development Goals (SDGs)
-The Sustainable Development Goals (SDGs) were adopted by the United Nations General Assembly in 2015 to advance the agenda of sustainable development [3]. The SDGs provide a set of 17 objectives agreed upon by 193 UN member states. They include 169 associated targets that embrace the economic, social, and environmental dimensions of sustainability.
+The Sustainable Development Goals (SDGs) were adopted by the United Nations General Assembly in 2015 to advance the agenda of sustainable development. The SDGs provide a set of 17 objectives agreed upon by 193 UN member states. They include 169 associated targets that embrace the economic, social, and environmental dimensions of sustainability.
 
 The lens of our research is narrowed down onto SDG 7 – Affordable and Clean Energy, which aims to ensure global access to affordable, reliable, sustainable, and clean energy. Its targets to be reached by 2030 are to:
 
 - (7.1) Ensure universal access to affordable, reliable, and modern energy services  
 - (7.2) Increase substantially the share of renewable energy in the global energy mix  
 - (7.3) Double the global rate of improvement in energy efficiency  
-- (7.a) Enhance international cooperation to facilitate access to clean energy research and technology, including renewable energy, energy efficiency, and advanced and cleaner fossil-fuel technology, and promote investment in energy infrastructure and clean energy technology [4]
+- (7.a) Enhance international cooperation to facilitate access to clean energy research and technology, including renewable energy, energy efficiency, and advanced and cleaner fossil-fuel technology, and promote investment in energy infrastructure and clean energy technology
 
 ### 2.3 SDG Score
-It is of critical importance to determine the degree to which SDGs are achieved, not only to hold and be held accountable but also to evaluate priorities, effectiveness of policies, and comparability. For this purpose, the SDG Score is computed. It emerges from selected indicators associated with certain targets and goals. The SDG score ranges between 0 and 100, where 0 is the lowest performance and 100 implies the goal has been achieved. Moreover, “the procedure for calculating the SDG Index comprises three steps: (i) establish performance thresholds and censor extreme values from the distribution of each indicator; (ii) rescale the data to ensure comparability across indicators (normalization); (iii) aggregate the indicators within and across SDGs.” [5]
+It is of critical importance to determine the degree to which SDGs are achieved, not only to hold and be held accountable but also to evaluate priorities, effectiveness of policies, and comparability. For this purpose, the SDG Score is computed. It emerges from selected indicators associated with certain targets and goals. The SDG score ranges between 0 and 100, where 0 is the lowest performance and 100 implies the goal has been achieved. Moreover, “the procedure for calculating the SDG Index comprises three steps: (i) establish performance thresholds and censor extreme values from the distribution of each indicator; (ii) rescale the data to ensure comparability across indicators (normalization); (iii) aggregate the indicators within and across SDGs.”
 
 For SDG 7, the indicators are:  
 - 7.1.1 Proportion of population with access to electricity  
 - 7.1.2 Proportion of population with primary reliance on clean fuels and technology  
 - 7.2.1 Renewable energy share in the total final energy consumption  
 - 7.3.1 Energy intensity measured in terms of primary energy and GDP  
-- 7.a.1 International financial flows to developing countries in support of clean energy research and development and renewable energy production, including in hybrid systems [4]
+- 7.a.1 International financial flows to developing countries in support of clean energy research and development and renewable energy production, including in hybrid systems
 
 It is crucial to examine these indicators with regard to the targets they are trying to capture.
 
 ### 2.4 Brazil's Energy Landscape
-Brazil, the ninth-largest energy consumer in the world, has an energy mix that is more renewable than the global average due to its extensive utilization of biofuels and hydropower [6]. However, overreliance on hydropower exposes issues of reliability, particularly under conditions of seasonal rainfall fluctuation and climate change.
+Brazil, the ninth-largest energy consumer in the world, has an energy mix that is more renewable than the global average due to its extensive utilization of biofuels and hydropower. However, overreliance on hydropower exposes issues of reliability, particularly under conditions of seasonal rainfall fluctuation and climate change.
 
 Our research reframes and elucidates challenges in the context of SDG 7 to provide a rigorous assessment of standard indicators' reliability in gauging a country's sustainable development progress.
 
@@ -182,6 +183,7 @@ These discrepancies indicate that a high SDG 7 score does not necessarily equate
 ---
 
 ## 6. Conclusion
+
 This analysis reveals that while Brazil appears to perform well according to SDG 7 indicators, significant unaddressed challenges persist. By comparing official datasets from the World Bank and other independent sources through our dashboard, a clearer picture of Brazil’s energy landscape emerges. Although SDG indicators effectively portray national trends, a deeper dive exposes critical issues that the current metrics overlook.
 
 To bridge these gaps and address local challenges, we propose:
@@ -194,4 +196,33 @@ By refining the current SDG7 indicators and incorporating these additional measu
 
 ---
 
-*End of Report*
+## 7. References 
+
+1. **Brundtland Report (Our Common Future)**. United Nations. Retrieved from [https://sustainabledevelopment.un.org/content/documents/5987our-common-future.pdf](https://sustainabledevelopment.un.org/content/documents/5987our-common-future.pdf)  
+   *(Brundtland Report, p.1; p.16)*
+
+2. **5 Pillars of Sustainable Development**. York University UNSDG Toolkit. Retrieved from [https://www.yorku.ca/unsdgs/toolkit/5-pillars-of-sustainable-development/](https://www.yorku.ca/unsdgs/toolkit/5-pillars-of-sustainable-development/)
+
+3. **Transforming our world: The 2030 Agenda for Sustainable Development**. United Nations. Retrieved from [https://sdgs.un.org/2030agenda](https://sdgs.un.org/2030agenda)
+
+4. **Global Indicator Framework for the Sustainable Development Goals**. United Nations Statistics Division. Retrieved from [https://unstats.un.org/sdgs/indicators/Global-Indicator-Framework-after-2024-refinement-English.pdf](https://unstats.un.org/sdgs/indicators/Global-Indicator-Framework-after-2024-refinement-English.pdf)
+
+5. **Method for Constructing the SDG Index and Dashboards**. SDG Index. Retrieved from [https://dashboards.sdgindex.org/chapters/methodology#c-method-for-constructing-the-sdg-index-and-dashboards](https://dashboards.sdgindex.org/chapters/methodology#c-method-for-constructing-the-sdg-index-and-dashboards)
+
+6. **Brazil's Energy Landscape**  
+   a. International Energy Agency. Retrieved from [https://www.iea.org/countries/brazil](https://www.iea.org/countries/brazil)  
+   b. Additional details from IOPscience: [https://iopscience.iop.org/article/10.1088/2515-7620/ac6939/pdf](https://iopscience.iop.org/article/10.1088/2515-7620/ac6939/pdf)
+
+7. Savian, F. de S., Siluk, J. C. M., Garlet, T. B., do Nascimento, F. M., Pinheiro, J. R., & Vale, Z. (2022). **Non-technical Losses in Brazil: Overview, Challenges, and Directions for Identification and Mitigation**. *International Journal of Energy Economics and Policy, 12*(3), 93–107. [https://doi.org/10.32479/ijeep.12614](https://doi.org/10.32479/ijeep.12614)
+
+8. Piai Paiva, J. C., Jannuzzi, G. D. M., & de Melo, C. A. (2019). **Mapping Electricity Affordability in Brazil**. *Utilities Policy, 59*, 100926. [https://doi.org/10.1016/j.jup.2019.100926](https://doi.org/10.1016/j.jup.2019.100926)
+
+9. **SDG Transformation Center, Sustainable Development Report Rankings**. Retrieved from [https://dashboards.sdgindex.org/rankings](https://dashboards.sdgindex.org/rankings)
+
+10. **SDG 7 Targets and Indicators**. United Nations. Retrieved from [https://sdgs.un.org/goals/goal7#targets_and_indicators](https://sdgs.un.org/goals/goal7#targets_and_indicators)
+
+11. **World Bank Group & IEA Statistics on Electricity Losses**. Retrieved from [https://data.worldbank.org/indicator/EG.ELC.LOSS.ZS?end=2014&start=1967](https://data.worldbank.org/indicator/EG.ELC.LOSS.ZS?end=2014&start=1967)
+
+12. Nuno, A. (n.d.). **Free electricity in favelas boosts Brazil’s social inclusion**. European Investment Bank. Retrieved March 11, 2025, from [https://www.eib.org/en/stories/electricity-brazil-favelas-social-inclusion](https://www.eib.org/en/stories/electricity-brazil-favelas-social-inclusion)
+
+13. **Brazilian Institute of Geography and Statistics (Statista)**. Retrieved from [https://www.statista.com/statistics/1251075/average-monthly-income-percentile-brazil/](https://www.statista.com/statistics/1251075/average-monthly-income-percentile-brazil/)
