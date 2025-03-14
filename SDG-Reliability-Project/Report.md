@@ -155,7 +155,6 @@ Our interactive world map dashboard highlights Brazil’s strong performance on 
 
 See Graph Figure1: SDG-Reliability-Project/Figures/Figure1 
 
-[SDG Dashboard](SDG-Reliability-Project/Figures/Figure1.png)
 
 *Source: [SDG Transformation Center, Sustainable Development Report](https://dashboards.sdgindex.org/rankings)  
 Source: [United Nations](https://sdgs.un.org/goals/goal7#targets_and_indicators)*
