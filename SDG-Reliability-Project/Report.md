@@ -153,7 +153,9 @@ Our mission was to determine whether SDG scores are reliable and universally app
 ### 4.1 Brazil’s Performance on SDG 7
 Our interactive world map dashboard highlights Brazil’s strong performance on SDG 7. The overall SDG 7 performance is computed by aggregating various indicators, providing a comprehensive view of a country’s status.
 
-![SDG Dashboard](SDG-Reliability-Project/Figures/Picture16.png)
+See Graph Figure1: SDG-Reliability-Project/Figures/Figure1 
+
+[SDG Dashboard](SDG-Reliability-Project/Figures/Figure1.png)
 
 *Source: [SDG Transformation Center, Sustainable Development Report](https://dashboards.sdgindex.org/rankings)  
 Source: [United Nations](https://sdgs.un.org/goals/goal7#targets_and_indicators)*
@@ -161,16 +163,31 @@ Source: [United Nations](https://sdgs.un.org/goals/goal7#targets_and_indicators)
 ### 4.2 Role of Hydropower in Brazil
 We discovered that Brazil’s best performance within SDG 7 is on Indicator 7.2.1 – renewable energy share in total energy consumption. Brazil consistently achieves a performance level of approximately 40–50% in recent years, significantly higher than Germany’s sub-20% share. This strong performance is largely due to Brazil’s high utilization of hydropower.
 
+
+See Graph Figure2: SDG-Reliability-Project/Figures/Figure2
+
+See Graph Figure3: SDG-Reliability-Project/Figures/Figure3 
+
+
+
 *Source: [United Nations](https://sdgs.un.org/goals/goal7#targets_and_indicators)*
 
 ### 4.3 Critique: Electricity Transmission and Distribution Losses
 Beyond SDG 7, our analysis revealed that Brazil loses around 16% of its electricity during transmission and distribution—substantially more than the global average. For context, Germany’s losses are approximately 4%. In northern Brazil, energy theft is alarmingly high, with reports indicating that around 50% of the electricity may be stolen [Nuno, 2025]. Although there is no proven causal relationship between transmission losses and theft, the data point toward significant systemic challenges.
+
+
+See Graph Figure4: SDG-Reliability-Project/Figures/Figure4 
+
 
 *Source: [World Bank Group, IEA Statistics](https://data.worldbank.org/indicator/EG.ELC.LOSS.ZS?end=2014&start=1967)  
 Source: [Nuno, A. (n.d.). Free electricity in favelas boosts Brazil’s social inclusion. European Investment Bank.](https://www.eib.org/en/stories/electricity-brazil-favelas-social-inclusion)*
 
 ### 4.4 Affordability Concerns
 Our findings on transmission and distribution losses raise questions about energy affordability in Brazil. Despite high electrification rates, Brazilian households, particularly those in low-income brackets, spend a disproportionately high percentage of their income on electricity. Graphs comparing Brazil and Germany reveal that low-income groups in Brazil face significant financial burdens, suggesting that high SDG 7 scores may mask underlying affordability issues.
+
+
+See Graph Figure5: SDG-Reliability-Project/Figures/Figure5
+
 
 *Source: [Brazilian Institute of Geography and Statistics](https://www.statista.com/statistics/1251075/average-monthly-income-percentile-brazil/)*
 
